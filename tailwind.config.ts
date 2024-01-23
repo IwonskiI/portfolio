@@ -6,12 +6,23 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    {
+      pattern: /bg-[a-z]*-[0-9]*/,
+      variants: ['lg','hover','focus','lg:hover'],
+    }
+  ],
+  darkMode:"class",
   theme: {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      colors: {
+        iconColor: "#76C2AF",
+        iconColorSel: "#578F81",
       },
     },
   },
