@@ -1,5 +1,5 @@
-import { DATABASE_ID, TOKEN } from "../../../config";
-import { ProjectItem } from "../components";
+import { DATABASE_ID, TOKEN } from "@/../config";
+import { ProjectItem } from "@/components";
 
 async function getData() {
   const options: RequestInit = {
@@ -30,7 +30,7 @@ export default async function Projects() {
   const data = await getData();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 py-10 mx-24 mb-10">
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 py-10 sm:mx-24 mb-10">
       <h1 className="text-4xl font-bold md:text-6xl">
         총 프로젝트 :
         <span className="pl-4 text-blue-500">{data.results.length}</span>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { favicon } from "../../../public";
+import { favicon } from "@/../public";
 import { Toggle } from ".";
 
 export default function Header() {

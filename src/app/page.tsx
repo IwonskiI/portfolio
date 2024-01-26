@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Animation } from "./components";
+import { Animation } from "../components";
 
 export default function Home() {
   return (

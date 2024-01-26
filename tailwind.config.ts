@@ -9,7 +9,7 @@ const config: Config = {
   safelist: [
     {
       pattern: /bg-[a-z]*-[0-9]*/,
-      variants: ['lg','hover','focus','lg:hover'],
+      variants: ['lg','hover','focus','lg:hover', 'dark'],
     }
   ],
   darkMode:"class",

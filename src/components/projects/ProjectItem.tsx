@@ -1,8 +1,12 @@
 import Image from "next/image";
+import { IMAGE_OPTION, IMAGE_URL } from "@/../config";
 
 export default function ProjectItem({ data }: any) {
+  const id = data.id;
   const title = data.properties.이름.title[0].plain_text;
   const cover = data.cover.file.url;
+  const img_url =
+    IMAGE_URL + encodeURIComponent(cover.split("?")[0]) + IMAGE_OPTION + id;
   const stiringifyData = JSON.stringify(data.properties);
   const parsedData = JSON.parse(stiringifyData);
   const skills = parsedData["Skill Set"].multi_select;
@@ -35,7 +39,7 @@ export default function ProjectItem({ data }: any) {
     <div className="project-card">
       <Image
         className="rounded-t-xl"
-        src={cover}
+        src={img_url}
         alt="Cover Image"
         quality={100}
         width={0}
@@ -53,14 +57,14 @@ export default function ProjectItem({ data }: any) {
           {s_date_str} ~ {e_date_str}
         </p>
         <h3 className="mt-4 text-sm">{desc}</h3>
-        <div className="flex itmes-start mt-2">
+        <div className="flex flex-wrap items-start mt-2 gap-y-2">
           {skills.map((skill: any) => {
             const classname =
-              "px-2 py-1 mr-2 rounded-md bg-" +
+              "px-2 py-1 mr-2 rounded-md dark:bg-" +
               skill.color +
-              "-200 dark:bg-" +
+              "-400 bg-" +
               skill.color +
-              "-700 w-30 dark:text-black";
+              "-300 w-30 dark:text-black";
             return (
               <h1 className={classname} key={skill.id}>
                 {skill.name}
