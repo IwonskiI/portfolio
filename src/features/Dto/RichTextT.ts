@@ -7,7 +7,7 @@ export interface RichTextT {
     mention?: MentionT;
     equation?: EquationT;
     annotations?: AnnotationT;
-    plain_text?: string;
+    plain_text: string;
     href?: string;
 }
 

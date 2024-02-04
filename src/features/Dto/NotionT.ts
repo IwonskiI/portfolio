@@ -4,6 +4,17 @@ import {
 } from "./BlockT";
 import { RichTextT } from "./RichTextT";
 
+export interface ResponseT {
+    object: string;
+    results: [];
+    next_cursor: string | null;
+    has_more: boolean;
+    type: "page_or_database";
+    page_or_database: any;
+    developer_survey: string;
+    request_id: string;
+}
+
 export interface BlockT {
     object: string;
     id: string;
@@ -17,7 +28,7 @@ export interface BlockT {
     type?: DataT;
     bookmark?: BookmarkT;
     breadcrumb?: {};
-    bullented_list_item?: BulletedListItemT;
+    bulleted_list_item?: BulletedListItemT;
     callout?: CalloutT;
     child_database?: ChildDatabaseT;
     child_page?: ChildPageT;
@@ -55,7 +66,7 @@ export interface PageT {
     last_edited_time?: string;
     last_edited_by?: string;
     archived?: boolean;
-    icon?: EmojiT | { type: "external"; external: { url: string; } };
+    icon?: EmojiT | { type: "external"; external: { url: string; } } | null;
     cover?: { type: "external"; external: { url: string; } };
     parent?: ParentT;
     url?: string;
@@ -72,7 +83,7 @@ export interface DatabaseT {
     lasted_edited_by?: UserT;
     title?: RichTextT[];
     description?: RichTextT[];
-    icon?: FileT | EmojiT;
+    icon?: FileT | EmojiT | null;
     cover?: FileT;
     parent?: ParentT;
     url?: string;
@@ -117,7 +128,8 @@ export interface CommentT {
 export interface FileT {
     type: "external" | "file";
     external?: { url: string; };
-    file?: { url: string; expiry_time: string; };
+    file: { url: string; expiry_time: string; };
+    name?: string;
 }
 
 export interface EmojiT {

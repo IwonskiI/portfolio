@@ -4,51 +4,54 @@ import { RichTextT } from "./RichTextT";
 
 export interface BookmarkT {
     caption?: RichTextT[];
-    url?: string;
+    url: string;
 }
 
 export interface BulletedListItemT {
-    rich_text?: RichTextT[];
+    rich_text: RichTextT[];
     color?: ColorT
     children?: BlockT[];
 }
 
 export interface CalloutT {
-    rich_text?: RichTextT[];
+    rich_text: RichTextT[];
     icon?: EmojiT | FileT;
 }
 
 export interface ChildDatabaseT {
-    title?: string;
+    title: string;
 }
 
 export interface ChildPageT {
-    title?: string;
+    title: string;
 }
 
 export interface CodeT {
     caption?: RichTextT[];
-    rich_text?: RichTextT[];
+    rich_text: RichTextT[];
     language?: LanguageT; 
 }
 
 export interface EmbedT {
-    url?: string;
+    url: string;
 }
 
 export interface EquationT {
-    expression?: string;
+    expression: string;
 }
 
 export interface FileBlockT {
     caption?: RichTextT[];
-    type?: "file" | "external";
-    file?: FileT;
+    type: "file" | "external";
+    file: {
+        url: string;
+        expiry_time?: string;
+    }
     name?: string;
 }
 
 export interface HeadingsT {
-    rich_text?: RichTextT[];
+    rich_text: RichTextT[];
     color?: ColorT;
     is_toggleable?: boolean;
 }
@@ -58,12 +61,12 @@ export interface ImageT extends FileT{
 }
 
 export interface LinkPreviewT {
-    url?: string;
+    url: string;
 }
 
 export type MentionTypeT = "database" | "date" | "link_preview" | "page" | "template_mention" | "user"
 export interface MentionT {
-    type?: MentionTypeT;
+    type: MentionTypeT;
     database?: { id?: string; };
     date?: DateT;
     link_preview?: { url?: string; };
@@ -75,13 +78,13 @@ export interface MentionT {
 }
 
 export interface NumberedListItemT {
-    rich_text?: RichTextT[];
+    rich_text: RichTextT[];
     color?: ColorT;
     children?: BlockT[];
 }
 
 export interface ParagraphT {
-    rich_text?: RichTextT[];
+    rich_text: RichTextT[];
     color?: ColorT;
     children?: BlockT[];
 }
@@ -91,7 +94,7 @@ export interface PdfT extends FileT{
 }
 
 export interface QuoteT {
-    rich_text?: RichTextT[];
+    rich_text: RichTextT[];
     color?: ColorT;
     children?: BlockT[];
 }

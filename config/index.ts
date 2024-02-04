@@ -1,4 +1,5 @@
 export const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 export const TOKEN = process.env.NOTION_TOKEN;
-export const IMAGE_URL = process.env.NOTION_URL;
-export const IMAGE_OPTION = process.env.IMAGE_URL_OPTION
+export const IMAGE_URL = process.env.NEXT_PUBLIC_IMG_URL;
+export const FILE_URL = process.env.NEXT_PUBLIC_FILE_URL; 
+export const URL_OPTION = process.env.NEXT_PUBLIC_URL_OPTION
