@@ -3,13 +3,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "wonski.notion.site",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'wonski.notion.site',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

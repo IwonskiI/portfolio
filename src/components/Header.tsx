@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
-import { favicon } from "@/../public";
-import { Toggle } from ".";
+import Image from 'next/image'
+import Link from 'next/link'
+import { favicon } from '@/../public'
+import { Toggle } from '.'
 
 export default function Header() {
   return (
@@ -31,5 +31,5 @@ export default function Header() {
         <Toggle />
       </div>
     </header>
-  );
+  )
 }

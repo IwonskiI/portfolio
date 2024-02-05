@@ -11,7 +11,7 @@
   "parserOptions": {
     "project": "./tsconfig.json",
     "sourceType": "module",
-    "ecmaFeatures" : {
+    "ecmaFeatures": {
       "tsx": true
     },
     "ecmaVersion": "latest"
@@ -28,7 +28,7 @@
   "globals": {
     "navigation": "readonly",
     "globalThis": false,
-    "NodeJS": true 
+    "NodeJS": true
   },
   "plugins": ["@typescript-eslint"],
   "settings": {
@@ -51,75 +51,44 @@
     "arrow-body-style": "off",
     "no-plusplus": "off",
     "react/display-name": "off",
-    "react/function-component-definition": ["warn", { "namedComponents": "arrow-function" }],
+    "react/function-component-definition": [
+      "warn",
+      { "namedComponents": ["arrow-function","function-declaration"] }
+    ],
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      "error",
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
     "react/jsx-wrap-multilines": "off",
     "react/react-in-jsx-scope": "off",
+    "react/no-array-index-key": "off",
     "react/prop-types": "off",
+    "react/self-closing-comp": "off",
+    "import/no-cycle": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
-    "no-restricted-exports": ["error", { "restrictDefaultExports": { "defaultFrom": false } }],
-    "import/order": [
+    "no-restricted-exports": [
       "error",
-      {
-        "pathGroups": [
-          {
-            "pattern": "@/lib/**",
-            "group": "external"
-          },
-          {
-            "pattern": "{types/*,@/types*,./types}",
-            "group": "type"
-          },
-          {
-            "pattern": "{hooks,@/hooks/**/*,./hooks/**,./use**,../use**,../../use**,../../../use**,,../../hooks/**,./_hooks/**,../../../_hooks/**}",
-            "group": "internal"
-          },
-          {
-            "pattern": "{utils/**/*,./utils,../utils,../../utils,../../../utils}",
-            "group": "type"
-          },
-          {
-            "pattern": "{@/constants/*,./constants}",
-            "group": "type"
-          },
-          {
-            "pattern": "{states/**/*,./states*,./**/states*,../states*,../../states*,../../../states*,,../../../../states*,**/**/**/states*}",
-            "group": "type"
-          },
-          {
-            "pattern": "@/services/**",
-            "group": "type"
-          },
-          {
-            "pattern": "{./helpers,./data,./config,./defaults,../../../defaults}",
-            "group": "type"
-          },
-          {
-            "pattern": "{components,components/_common/**,@/components,@/components/**,svgs,@/assets/**/*,@/app/**,routes/**,public/**}",
-            "group": "index"
-          },
-          {
-            "pattern": "{styles,./*.scss,../*.scss,../*.module.scss}",
-            "group": "index"
-          }
-        ],
-        "groups": [
-          ["external", "builtin"],
-          ["type", "internal", "object"],
-          ["parent", "sibling", "index"]
-        ],
-        "newlines-between": "always"
-      }
+      { "restrictDefaultExports": { "defaultFrom": false } }
     ],
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off",
+    "no-nested-ternary": "off",
+    "no-loop-func": "off",
+    "import/order": "off",
     "import/no-anonymous-default-export": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["**/*.test.tsx", "**/*.stories.*", "**/.storybook/**/*.*", "setupTests.ts"],
+        "devDependencies": [
+          "**/*.test.tsx",
+          "**/*.stories.*",
+          "**/.storybook/**/*.*",
+          "setupTests.ts"
+        ],
         "peerDependencies": true
       }
     ],
@@ -136,7 +105,10 @@
     "no-param-reassign": ["error", { "props": false }],
     "no-unused-expressions": ["warn"],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" }
+    ],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/camelcase": "off",

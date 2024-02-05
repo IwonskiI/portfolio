@@ -9,10 +9,10 @@ const config: Config = {
   safelist: [
     {
       pattern: /bg-[a-z]*-[0-9]*/,
-      variants: ['lg','hover','focus','lg:hover', 'dark'],
-    }
+      variants: ['lg', 'hover', 'focus', 'lg:hover', 'dark'],
+    },
   ],
-  darkMode:"class",
+  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage: {
@@ -21,8 +21,8 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        iconColor: "#76C2AF",
-        iconColorSel: "#578F81",
+        iconColor: '#76C2AF',
+        iconColorSel: '#578F81',
       },
     },
   },

@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import { useEffect } from "react";
-import { preventScroll, allowScroll } from "@/utils/scroll";
+import { useEffect } from 'react'
+import { preventScroll, allowScroll } from '@/utils/scroll'
 
 const usePreventScroll = () => {
   useEffect(() => {
-    const prevScrollY = preventScroll();
+    const prevScrollY = preventScroll()
     return () => {
-      allowScroll(prevScrollY);
-    };
-  }, []);
-};
+      allowScroll(prevScrollY)
+    }
+  }, [])
+}
 
-export default usePreventScroll;
+export default usePreventScroll

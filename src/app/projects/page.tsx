@@ -1,4 +1,5 @@
 import { DATABASE_ID, TOKEN } from '@/../config'
+
 import { Main } from '@/components'
 
 async function getDatabase() {
@@ -11,8 +12,7 @@ async function getDatabase() {
       Authorization: `Bearer ${TOKEN}`,
     },
     body: JSON.stringify({ page_size: 100 }),
-    cache: 'no-store',
-    // next: { revalidate: 3600 },
+    next: { revalidate: 3600 },
   }
 
   const res = await fetch(

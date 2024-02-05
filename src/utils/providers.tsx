@@ -1,4 +1,6 @@
 'use client'
+
+import React from 'react'
 import { Provider } from 'react-redux'
 import { store } from '@/features/states/store'
 import { ThemeProvider } from 'next-themes'

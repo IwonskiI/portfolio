@@ -1,5 +1,6 @@
 'use client'
 
+import React, { useState } from 'react'
 import usePreventScroll from '@/hooks/use-preventScroll'
 import Backdrop from '../Backdrop'
 import { useAppDispatch, useAppSelector } from '@/features/states/store'
@@ -7,7 +8,6 @@ import { projectDetails, setContent } from '@/features/states/project-slice'
 import { BlockT, EmojiT } from '@/features/Dto/NotionT'
 import { Blocks, Contents } from '@/features/Dto/ProjectT'
 import { DetailBlocks } from '..'
-import { useState } from 'react'
 
 interface ModalProps {
   modalHandelr: () => void
@@ -26,24 +26,24 @@ export default function Detail({ modalHandelr }: ModalProps) {
   const title = parsedData['이름'].title[0].plain_text
   const desc = parsedData['프로젝트 소개'].rich_text[0].plain_text
   const team = parsedData['팀 구성'].rich_text[0].plain_text
-  const s_date_str = parsedData['진행 기간'].date.start
-  const e_date_str = parsedData['진행 기간'].date.end
+  const sDateStr = parsedData['진행 기간'].date.start
+  const eDateStr = parsedData['진행 기간'].date.end
   const period = () => {
-    const s_date_arr = s_date_str.split('-')
-    const e_date_arr = e_date_str.split('-')
+    const sDateArr = sDateStr.split('-')
+    const eDateArr = eDateStr.split('-')
 
-    var s_date = new Date(
-      Number(s_date_arr[0]),
-      Number(s_date_arr[1]),
-      Number(s_date_arr[2]),
+    const sDate = new Date(
+      Number(sDateArr[0]),
+      Number(sDateArr[1]),
+      Number(sDateArr[2]),
     )
-    var e_date = new Date(
-      Number(e_date_arr[0]),
-      Number(e_date_arr[1]),
-      Number(e_date_arr[2]),
+    const eDate = new Date(
+      Number(eDateArr[0]),
+      Number(eDateArr[1]),
+      Number(eDateArr[2]),
     )
 
-    const diffInMs = Math.abs(Number(e_date) - Number(s_date))
+    const diffInMs = Math.abs(Number(eDate) - Number(sDate))
     const res = diffInMs / (1000 * 60 * 60 * 24)
 
     return res + 1
@@ -83,28 +83,22 @@ export default function Detail({ modalHandelr }: ModalProps) {
         currentContent.sub_content = page.bookmark.url
         currentContentTemp = currentContent
         currentContent = null
-      } else {
-        console.log('error : ' + page.bookmark.url)
       }
     } else if (page.link_preview) {
       if (currentContent !== null) {
         currentContent.sub_content = page.link_preview.url
         currentContentTemp = currentContent
         currentContent = null
-      } else {
-        console.log('error : ' + page.link_preview.url)
       }
     } else if (page.embed) {
       if (currentContent !== null) {
         currentContent.sub_content = page.embed.url
         currentContentTemp = currentContent
         currentContent = null
-      } else {
-        console.log('error : ' + page.embed.url)
       }
     } else if (page.image) {
       currentContent = {
-        main_content: 'image?' + page.id,
+        main_content: `image?${page.id}`,
         sub_content: page.image.file.url,
       }
       currentBlock!.contents.push(currentContent)
@@ -119,80 +113,77 @@ export default function Detail({ modalHandelr }: ModalProps) {
     } else if (page.file) {
       currentContent = {
         main_content: page.file.name ?? '',
-        sub_content: page.file.file.url + '?id=' + page.id,
+        sub_content: `${page.file.file.url}?id=${page.id}`,
       }
-      console.log(currentContent.sub_content)
       currentBlock!.contents.push(currentContent)
       currentContent = null
     } else if (page.bulleted_list_item) {
-      let bulleted_children_list: any = null
-      let bulleted_children: string[] = []
+      let bulletedChildrenList: any = null
+      const bulletedChildren: string[] = []
       if (currentContent !== null) {
         currentBlock!.contents.push(currentContent)
         currentContent = null
       }
       if (page.has_children) {
         try {
-          const block_res = await fetch(`/api/notion/pages/${page.id}`, {
-            cache: 'no-store',
-          })
-          if (!block_res.ok) {
+          const blockRes = await fetch(`/api/notion/pages/${page.id}`, {})
+          if (!blockRes.ok) {
             throw new Error('Network response was not ok')
           }
-          bulleted_children_list = await block_res.json()
-          for (const children of bulleted_children_list) {
-            bulleted_children.push(
-              '⸰ ' + children.bulleted_list_item.rich_text[0].plain_text,
+          bulletedChildrenList = await blockRes.json()
+          for (const children of bulletedChildrenList) {
+            bulletedChildren.push(
+              `⸰ ${children.bulleted_list_item.rich_text[0].plain_text}`,
             )
           }
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error('Error fetching data:', error)
         }
       }
       currentContent = {
-        main_content: '• ' + page.bulleted_list_item.rich_text[0].plain_text,
-        sub_content: bulleted_children,
+        main_content: `• ${page.bulleted_list_item.rich_text[0].plain_text}`,
+        sub_content: bulletedChildren,
       }
     } else if (page.column_list) {
       try {
-        const column_res = await fetch(`/api/notion/pages/${page.id}`, {
-          cache: 'no-store',
-        })
-        if (!column_res.ok) {
+        const columnRes = await fetch(`/api/notion/pages/${page.id}`, {})
+        if (!columnRes.ok) {
           throw new Error('Network response was not ok')
         }
-        const column_children_list = await column_res.json()
-        for (const children of column_children_list) {
+        const columnChildrenList = await columnRes.json()
+        for (const children of columnChildrenList) {
           try {
-            const column_child_res = await fetch(
+            const columnChildrenRes = await fetch(
               `/api/notion/pages/${children.id}`,
-              { cache: 'no-store' },
             )
-            if (!column_child_res.ok) {
+            if (!columnChildrenRes.ok) {
               throw new Error('Network response was not ok')
             }
-            const column_child = await column_child_res.json()
-            if (column_child[0].image) {
+            const columnChildren = await columnChildrenRes.json()
+            if (columnChildren[0].image) {
               currentContent = {
-                main_content: 'image?' + column_child[0].id,
-                sub_content: column_child[0].image.file.url,
+                main_content: `image?${columnChildren[0].id}`,
+                sub_content: columnChildren[0].image.file.url,
               }
               currentBlock!.contents.push(currentContent)
               currentContent = null
-            } else if (column_child[0].file) {
+            } else if (columnChildren[0].file) {
               currentContent = {
-                main_content: column_child[0].file.name ?? '',
-                sub_content:
-                  column_child[0].file.file.url + '?id=' + column_child[0].id,
+                main_content: columnChildren[0].file.name ?? '',
+                sub_content: `${columnChildren[0].file.file.url}
+                  ?id=${columnChildren[0].id}`,
               }
               currentBlock!.contents.push(currentContent)
               currentContent = null
             }
           } catch (error) {
+            // eslint-disable-next-line no-console
             console.error('Error fetching data:', error)
           }
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching data:', error)
       }
     }
@@ -230,6 +221,7 @@ export default function Detail({ modalHandelr }: ModalProps) {
   return (
     <Backdrop modalHandelr={modalHandelr}>
       <div
+        role="presentation"
         className="bg-white dark:bg-slate-800 m-auto p-8 w-3/4 h-4/5 justify-center overflow-y-scroll flex flex-col items-center"
         onClick={stopPropagation}
       >
@@ -251,12 +243,12 @@ export default function Detail({ modalHandelr }: ModalProps) {
               <h2 className="text-lg font-bold">
                 <strong>프로젝트 기간</strong>
               </h2>
-              {e_date_str ? (
+              {eDateStr ? (
                 <p className="text-sm">
-                  {s_date_str} ~ {e_date_str} ({period()}일)
+                  {sDateStr} ~ {eDateStr} ({period()}일)
                 </p>
               ) : (
-                <p className="text-sm">{s_date_str} ~ 진행중</p>
+                <p className="text-sm">{sDateStr} ~ 진행중</p>
               )}
             </div>
             <div className="flex-1">

@@ -1,5 +1,6 @@
-import Link from "next/link";
-import { Animation } from "../components";
+import Link from 'next/link'
+
+import { Animation } from '../components'
 
 export default function Home() {
   return (
@@ -22,9 +23,9 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-          <Animation />
+          <Animation></Animation>
         </div>
       </div>
     </section>
-  );
+  )
 }
