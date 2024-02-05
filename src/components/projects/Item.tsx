@@ -73,11 +73,7 @@ export default function Item({ data }: any) {
                 : skill.color === 'brown'
                   ? 'cyan'
                   : skill.color
-            const classname = `px-2 py-1 mr-2 rounded-md dark:bg-
-              ${color}
-              -400 bg-
-              ${color}
-              -300 w-30 dark:text-black`
+            const classname = `px-2 py-1 mr-2 rounded-md dark:bg-${color}-400 bg-${color}-300 w-30 dark:text-black`
             return (
               <h1 className={classname} key={skill.id}>
                 {skill.name}
