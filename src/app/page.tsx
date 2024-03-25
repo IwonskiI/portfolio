@@ -16,6 +16,7 @@ export default function Home() {
             - 안녕하세요 Front-End 주니어 개발자 한원석 입니다.
             <br />- “이전보다 최소한 한 가지는 더 발전하자” 는 신념을 가지고
             개발합니다.
+            <br />- 사용자 경험을 최우선으로 생각하며 개발합니다.
             <br />- 실패를 두려워하지 않고 새로운 기술을 탐구하는 것을 즐깁니다.
             <br />- 동료와의 커뮤니케이션 능력을 중요하게 생각합니다.
             <br />- <strong>React.JS</strong>와 <strong>TypeScript</strong>에
