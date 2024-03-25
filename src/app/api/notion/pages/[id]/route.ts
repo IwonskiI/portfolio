@@ -11,6 +11,9 @@ export async function GET(request: any, context: { params: any }) {
       'Notion-Version': '2022-06-28',
       Authorization: `Bearer ${TOKEN}`,
     },
+    next: {
+      revalidate: 86400, // 24 hours
+    },
   }
   const res = await fetch(url, options)
   if (!res.ok) {
